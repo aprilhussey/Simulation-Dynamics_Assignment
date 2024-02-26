@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour
     // Input actions variables
     private Vector2 movementInput;
 
-    void Awake()
+    public GameObject interactable;
+
+	void Awake()
     {
         playerRigidbody = this.GetComponent<Rigidbody>();
 
@@ -50,4 +52,28 @@ public class PlayerController : MonoBehaviour
             movementInput = Vector2.zero;
         }
     }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return; // Ensure action only happens once
+
+        // Check if interactable object is in range
+        // If more than one interactable object is in range
+        // Show menu of interactable objects in range
+        // List<IInteractable> interactablesInRange = new List...
+        // IInteractable interactable = interactable object in range
+        // interactable.Interact(this);
+    }
+
+    public void OnGetKnowledge(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return; // Ensure action only happens once
+        
+        // Check if interactable object is in range
+        // If more than one interactable object is in range
+        // Show menu of interactable objects in range
+        // List<IInteractable> interactablesInRange = new List...
+        // IInteractable interactable = interactable object in range
+        interactable.GetComponent<IInteractable>().GetKnowledge();
+	}
 }

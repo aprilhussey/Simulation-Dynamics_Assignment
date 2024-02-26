@@ -10,6 +10,9 @@ public class Plant : MonoBehaviour, IInteractable
 	[SerializeField]
 	private string itemName;
 
+    [SerializeField]
+    private string itemDescription;
+
 	[SerializeField]
 	private string commonName;
 	[SerializeField]
@@ -20,23 +23,72 @@ public class Plant : MonoBehaviour, IInteractable
 	[SerializeField]
 	private PlantData.GrowthStage growthStage;
 
+	[SerializeField]
+	private GameObject plantInformationCanvasPrefab;
+
     void Awake()
     {
-        itemName = plantData.itemName;
-        
-        commonName = plantData.commonName;
-        scientificName = plantData.scientificName;
-
-        plantType = plantData.plantType;
-        growthStage = plantData.growthStage;
+		SetPlantData();
     }
 
-    public void Interact()
+    public void Interact(PlayerController playerController)
     {
-        // Popup window that has multiple options
-        // Buttons might include:
-        // - Water
-        // - Fertilize
-        // - Move pot
+        // Based on tool held - watering can will water, soil will change color
     }
+
+    public void GetKnowledge()
+    {
+		// Popup window showing the plant's information
+		GameObject plantInformationCanvas = Instantiate(plantInformationCanvasPrefab);
+		plantInformationCanvas.GetComponent<PlantInformationCanvas>().SetPlantInformationPopup(plantData);
+    }
+
+	private void SetPlantData()
+	{
+		if (plantData != null)
+		{
+			if (plantData.itemName != null)
+			{
+				itemName = plantData.itemName;
+			}
+			else
+			{
+				Debug.LogError($"{plantData.name} Item Name field is empty");
+			}
+
+			if (plantData.itemDescription != null)
+			{
+				itemDescription = plantData.itemDescription;
+			}
+			else
+			{
+				Debug.LogError($"{plantData.name} Item Description field is empty");
+			}
+
+			if (plantData.commonName != null)
+			{
+				commonName = plantData.commonName;
+			}
+			else
+			{
+				Debug.LogError($"{plantData.name} Common Name field is empty");
+			}
+
+			if (plantData.scientificName != null)
+			{
+				scientificName = plantData.scientificName;
+			}
+			else
+			{
+				Debug.LogError($"{plantData.name} Scientific Name field is empty");
+			}
+
+			plantType = plantData.plantType;
+			growthStage = plantData.growthStage;
+		}
+		else
+		{
+			Debug.LogError($"Plant Data field is empty");
+		}
+	}
 }
