@@ -623,6 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1242028367}
+  - component: {fileID: 1242028370}
   - component: {fileID: 1242028369}
   - component: {fileID: 1242028368}
   m_Layer: 0
@@ -672,6 +673,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScene: {fileID: 102900000, guid: b350d9469ea0224418267c6b78e3a1d6, type: 3}
+  plantInformationCanvas: {fileID: 0}
+--- !u!114 &1242028370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1242028366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30264636ef06d8c4b832659682e7dc3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1510130423
 GameObject:
   m_ObjectHideFlags: 0

@@ -57,4 +57,9 @@ public class PlantInformationCanvas : MonoBehaviour
 			Debug.LogError($"Plant Data field is empty");
 		}
 	}
+
+	public void DestroyPlantInformationPopup()
+	{
+		Destroy(this.gameObject);
+	}
 }

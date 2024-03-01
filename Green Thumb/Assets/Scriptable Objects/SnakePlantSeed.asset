@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SnakePlantSeed
   m_EditorClassIdentifier: 
   itemName: Snake Plant
+  itemDescription: Lorem ipsum
   commonName: Variegated Snake Plant
   scientificName: Dracaena (Sansevieria) trifasciata 'Laurentii'
   plantType: 1

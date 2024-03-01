@@ -7,26 +7,27 @@ public class Plant : MonoBehaviour, IInteractable
     [SerializeField]
     private PlantData plantData;
 
-	[SerializeField]
+	//[SerializeField]
 	private string itemName;
 
-    [SerializeField]
+    //[SerializeField]
     private string itemDescription;
 
-	[SerializeField]
+	//[SerializeField]
 	private string commonName;
-	[SerializeField]
+	//[SerializeField]
 	private string scientificName;
 
-	[SerializeField]
+	//[SerializeField]
 	private PlantData.PlantType plantType;
-	[SerializeField]
+	//[SerializeField]
 	private PlantData.GrowthStage growthStage;
 
 	[SerializeField]
 	private GameObject plantInformationCanvasPrefab;
+	private GameObject plantInformationCanvas;
 
-    void Awake()
+	void Awake()
     {
 		SetPlantData();
     }
@@ -38,9 +39,17 @@ public class Plant : MonoBehaviour, IInteractable
 
     public void GetKnowledge()
     {
-		// Popup window showing the plant's information
-		GameObject plantInformationCanvas = Instantiate(plantInformationCanvasPrefab);
-		plantInformationCanvas.GetComponent<PlantInformationCanvas>().SetPlantInformationPopup(plantData);
+		if (plantInformationCanvas == null)
+		{
+			// Popup window showing the plant's information
+			plantInformationCanvas = Instantiate(plantInformationCanvasPrefab);
+			plantInformationCanvas.GetComponent<PlantInformationCanvas>().SetPlantInformationPopup(plantData);
+		}
+		else
+		{
+			plantInformationCanvas.GetComponent<PlantInformationCanvas>().DestroyPlantInformationPopup();
+			plantInformationCanvas = null;
+		}
     }
 
 	private void SetPlantData()
