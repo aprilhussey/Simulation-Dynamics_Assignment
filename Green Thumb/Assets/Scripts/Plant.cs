@@ -25,16 +25,18 @@ public class Plant : MonoBehaviour, IInteractable
 
 	[SerializeField]
 	private GameObject plantInformationCanvasPrefab;
-	private GameObject plantInformationCanvas;
+	[HideInInspector]
+	public GameObject plantInformationCanvas;
 
 	void Awake()
     {
 		SetPlantData();
     }
 
-    public void Interact(PlayerController playerController)
+    public void Interact(Interactor interactor)
     {
-        // Based on tool held - watering can will water, soil will change color
+		// Based on tool held - watering can will water, soil will change color
+		Debug.Log($"Interacted with {commonName}!");
     }
 
     public void GetKnowledge()

@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IInteractable
 {
-	void Interact(PlayerController playerController);
+	void Interact(Interactor interactor);
 	void GetKnowledge();
 }

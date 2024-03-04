@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interactor : MonoBehaviour
 {
@@ -19,7 +20,29 @@ public class Interactor : MonoBehaviour
     void Update()
     {
         interactablesFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, interactionPointRadius, colliders, interactableMask);
-    }
+	}
+
+	public void OnInteract(InputAction.CallbackContext context)
+	{
+		if (!context.performed) return; // Ensure action only happens once
+
+		if (interactablesFound > 0)
+		{
+			IInteractable interactable = colliders[0].GetComponent<IInteractable>();
+			interactable.Interact(this);
+		}
+	}
+
+	public void OnGetKnowledge(InputAction.CallbackContext context)
+	{
+		if (!context.performed) return; // Ensure action only happens once
+
+		if (interactablesFound > 0)
+		{
+			IInteractable interactable = colliders[0].GetComponent<IInteractable>();
+			interactable.GetKnowledge();
+		}
+	}
 
 	private void OnDrawGizmos()
 	{

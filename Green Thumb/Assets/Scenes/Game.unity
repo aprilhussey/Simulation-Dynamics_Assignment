@@ -228,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: b3ee628097e06304fa82c34a37adcb52, type: 2}
   plantInformationCanvasPrefab: {fileID: 3700526684292915591, guid: 050f7b11865b36240ac471e0ec7944db, type: 3}
+  plantInformationCanvas: {fileID: 0}
 --- !u!4 &3972524
 Transform:
   m_ObjectHideFlags: 0
@@ -599,6 +600,9 @@ MonoBehaviour:
   speed: 10
   rotationSpeed: 100
   interactable: {fileID: 3972519}
+  uiObjects:
+  - {fileID: 1797786078}
+  - {fileID: 3700526684292915591, guid: 050f7b11865b36240ac471e0ec7944db, type: 3}
 --- !u!114 &523675675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,8 +646,8 @@ MonoBehaviour:
     m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 523675674}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 523675677}
+        m_TargetAssemblyTypeName: Interactor, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
@@ -658,8 +662,8 @@ MonoBehaviour:
     m_ActionName: Player/Interact[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 523675674}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 523675677}
+        m_TargetAssemblyTypeName: Interactor, Assembly-CSharp
         m_MethodName: OnGetKnowledge
         m_Mode: 0
         m_Arguments:

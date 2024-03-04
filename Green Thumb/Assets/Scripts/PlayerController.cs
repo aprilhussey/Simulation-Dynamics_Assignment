@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementInput;
 
     public GameObject interactable;
+
+    [SerializeField]
+	List<GameObject> uiObjects = new List<GameObject>();
 
 	void Awake()
     {
@@ -43,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnMovement(InputAction.CallbackContext context)
     {
+
+
         if (context.phase == InputActionPhase.Started || context.phase == InputActionPhase.Performed)
         {
             movementInput = context.ReadValue<Vector2>();
@@ -52,28 +58,4 @@ public class PlayerController : MonoBehaviour
             movementInput = Vector2.zero;
         }
     }
-
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return; // Ensure action only happens once
-
-        // Check if interactable object is in range
-        // If more than one interactable object is in range
-        // Show menu of interactable objects in range
-        // List<IInteractable> interactablesInRange = new List...
-        // IInteractable interactable = interactable object in range
-        // interactable.Interact(this);
-    }
-
-    public void OnGetKnowledge(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return; // Ensure action only happens once
-        
-        // Check if interactable object is in range
-        // If more than one interactable object is in range
-        // Show menu of interactable objects in range
-        // List<IInteractable> interactablesInRange = new List...
-        // IInteractable interactable = interactable object in range
-        interactable.GetComponent<IInteractable>().GetKnowledge();
-	}
 }

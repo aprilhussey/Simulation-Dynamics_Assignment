@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +17,16 @@ public class GameManager : MonoBehaviour
 		Exit
     }
 
-    private GameState gameState;
+	public enum GameSpeed
+	{
+		Paused,
+		Half,
+		Normal,
+        Double,
+	}
+
+	private GameState gameState;
+    private GameSpeed gameSpeed;
 
     [SerializeField]
     private Object loadingScene;
@@ -33,8 +43,9 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        // Initialize game state
+        // Initialize game state and speed
         gameState = GameState.MainMenu;
+        gameSpeed = GameSpeed.Normal;
     }
 
     public void ChangeGameState(GameState newGameState)
@@ -65,6 +76,30 @@ public class GameManager : MonoBehaviour
 			case GameState.Exit:
                 Application.Quit();
                 break;
+        }
+    }
+
+    public void ChangeGameSpeed(GameSpeed newGameSpeed)
+    {
+		if (gameSpeed != newGameSpeed)
+		{
+			gameSpeed = newGameSpeed;
+		}
+
+		switch (gameSpeed)
+        {
+            case GameSpeed.Paused:
+                Time.timeScale = 0f;
+                break;
+			case GameSpeed.Half:
+				Time.timeScale = 0.5f;
+				break;
+			case GameSpeed.Normal:
+				Time.timeScale = 1f;
+				break;
+			case GameSpeed.Double:
+				Time.timeScale = 2f;
+				break;
         }
     }
 
