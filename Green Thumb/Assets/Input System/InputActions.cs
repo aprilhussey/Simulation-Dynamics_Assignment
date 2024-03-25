@@ -28,28 +28,19 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""e4bc4e5f-26cc-457f-af05-9c0bc406d8ce"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
+                    ""name"": ""Pan"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""2d055a31-ce41-4517-ad85-a8850bef820c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""104a70e9-1cf3-497e-9dd7-a7b9101d7149"",
+                    ""id"": ""6f313833-3098-4096-8253-102bae8c649e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""GetKnowledge"",
-                    ""type"": ""Button"",
-                    ""id"": ""d026212e-197d-42b2-b4f1-896aacef1e2a"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Zoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""2aeb31b3-5df8-41ae-b799-ab9bc51840f0"",
+                    ""expectedControlType"": ""Delta"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -57,79 +48,46 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""WASD"",
-                    ""id"": ""97e37079-f6f6-4315-b5ae-1aa2e46f9dbf"",
-                    ""path"": ""2DVector(mode=1)"",
+                    ""name"": ""Mouse"",
+                    ""id"": ""f64308ec-33ab-4c15-bcff-8a72dcfb1d75"",
+                    ""path"": ""OneModifier"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Movement"",
+                    ""action"": ""Pan"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""55bc55bb-3ba9-4425-8abf-22595bb8e60d"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""name"": ""modifier"",
+                    ""id"": ""2e69a753-918a-474d-8392-fca765c1a1cb"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Movement"",
+                    ""action"": ""Pan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
-                    ""id"": ""9460bae4-b52c-44ed-ab27-a33bc98052c4"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""name"": ""binding"",
+                    ""id"": ""e7e3cfbe-f016-4897-ab00-77a2cac9910e"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""e69a05ab-f5fb-4451-b61c-94ba7228e0a3"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""83ecf5b7-cbc1-456e-a529-4102511e75a3"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Movement"",
+                    ""action"": ""Pan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1b9299ae-f73c-4784-947d-6d6f5b25c5c9"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""8f317f39-1be1-4512-ba23-2561eec57a73"",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouse"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""44db5c27-7b2b-4274-bf79-21b70f7a787c"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KeyboardMouse"",
-                    ""action"": ""GetKnowledge"",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -157,9 +115,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_GetKnowledge = m_Player.FindAction("GetKnowledge", throwIfNotFound: true);
+        m_Player_Pan = m_Player.FindAction("Pan", throwIfNotFound: true);
+        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -221,16 +178,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_GetKnowledge;
+    private readonly InputAction m_Player_Pan;
+    private readonly InputAction m_Player_Zoom;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
         public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @GetKnowledge => m_Wrapper.m_Player_GetKnowledge;
+        public InputAction @Pan => m_Wrapper.m_Player_Pan;
+        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -240,28 +195,22 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Movement.started += instance.OnMovement;
-            @Movement.performed += instance.OnMovement;
-            @Movement.canceled += instance.OnMovement;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
-            @GetKnowledge.started += instance.OnGetKnowledge;
-            @GetKnowledge.performed += instance.OnGetKnowledge;
-            @GetKnowledge.canceled += instance.OnGetKnowledge;
+            @Pan.started += instance.OnPan;
+            @Pan.performed += instance.OnPan;
+            @Pan.canceled += instance.OnPan;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Movement.started -= instance.OnMovement;
-            @Movement.performed -= instance.OnMovement;
-            @Movement.canceled -= instance.OnMovement;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
-            @GetKnowledge.started -= instance.OnGetKnowledge;
-            @GetKnowledge.performed -= instance.OnGetKnowledge;
-            @GetKnowledge.canceled -= instance.OnGetKnowledge;
+            @Pan.started -= instance.OnPan;
+            @Pan.performed -= instance.OnPan;
+            @Pan.canceled -= instance.OnPan;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -290,8 +239,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnMovement(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
-        void OnGetKnowledge(InputAction.CallbackContext context);
+        void OnPan(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }
