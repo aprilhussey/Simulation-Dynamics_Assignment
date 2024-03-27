@@ -1,5 +1,20 @@
 using UnityEngine;
 
+[System.Serializable]
+public class GrowthStage
+{
+	public enum Stage
+	{
+		Seed,
+		Sprout,
+		Budding,
+		Flowering,
+	}
+
+	public Stage stage;
+	public Sprite stageSprite;
+}
+
 [CreateAssetMenu(fileName = "PlantName", menuName = "Scriptable Objects/Plant")]
 public class PlantData : ItemData
 {
@@ -11,20 +26,9 @@ public class PlantData : ItemData
 		Fruit
 	}
 
-	public enum GrowthStage
-	{
-		Seed,
-		Sprout,
-		Seeding,
-		Vegetative,
-		Budding,
-		Flowering,
-		Ripening
-	}
-
 	public string commonName;
 	public string scientificName;
 
 	public PlantType plantType;
-	public GrowthStage growthStage;
+	public GrowthStage[] growthStages;
 }

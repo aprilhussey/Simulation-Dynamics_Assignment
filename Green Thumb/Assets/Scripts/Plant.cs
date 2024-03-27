@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plant : MonoBehaviour, IInteractable
+public class Plant : MonoBehaviour
 {
     [SerializeField]
     private PlantData plantData;
@@ -21,12 +21,9 @@ public class Plant : MonoBehaviour, IInteractable
 	//[SerializeField]
 	private PlantData.PlantType plantType;
 	//[SerializeField]
-	private PlantData.GrowthStage growthStage;
+	private GrowthStage[] growthStages;
 
-	[SerializeField]
-	private GameObject plantInformationCanvasPrefab;
-	[HideInInspector]
-	public GameObject plantInformationCanvas;
+	private GrowthStage currentGrowthStage;
 
 	void Awake()
     {
@@ -37,21 +34,6 @@ public class Plant : MonoBehaviour, IInteractable
     {
 		// Based on tool held - watering can will water, soil will change color
 		Debug.Log($"Interacted with {commonName}!");
-    }
-
-    public void GetKnowledge()
-    {
-		if (plantInformationCanvas == null)
-		{
-			// Popup window showing the plant's information
-			plantInformationCanvas = Instantiate(plantInformationCanvasPrefab);
-			plantInformationCanvas.GetComponent<PlantInformationCanvas>().SetPlantInformationPopup(plantData);
-		}
-		else
-		{
-			plantInformationCanvas.GetComponent<PlantInformationCanvas>().DestroyPlantInformationPopup();
-			plantInformationCanvas = null;
-		}
     }
 
 	private void SetPlantData()
@@ -95,7 +77,7 @@ public class Plant : MonoBehaviour, IInteractable
 			}
 
 			plantType = plantData.plantType;
-			growthStage = plantData.growthStage;
+			growthStages = plantData.growthStages;
 		}
 		else
 		{
