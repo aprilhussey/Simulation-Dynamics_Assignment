@@ -5,9 +5,6 @@ using UnityEngine;
 /*
  * Handles the movement of the ants - based on Rock Ants
  * (Temnothorax rugatulus).
- * -    78% of the time turn one direction then the next
- *      after roughly three times the length of the ant.
- * -    22% of the time is random movement.
 */
 
 public class Meander : MonoBehaviour
@@ -22,7 +19,9 @@ public class Meander : MonoBehaviour
 	private Vector2 startPosition;
 	private float maxTravelDistance;
 
-	private float randomTravelAngle;
+	private float randomRotationAngle;
+
+	private bool isTurningLeft;
 
 	void Awake()
 	{
@@ -34,9 +33,12 @@ public class Meander : MonoBehaviour
 	{
 		startPosition = this.transform.position;
 
-		// Set random travel angle
-		randomTravelAngle = Random.Range(0f, 360f);
-		this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
+		// Set random rotation angle
+		randomRotationAngle = Random.Range(-180, 180f);
+		this.transform.rotation = Quaternion.Euler(0, 0, randomRotationAngle);
+
+		// Set direction NPC will turn first
+		SetFirstTurnDirection();
 	}
 
 	void Update()
@@ -47,20 +49,36 @@ public class Meander : MonoBehaviour
 
 		if (Vector2.Distance(npcRigidbody.position, startPosition) >= maxTravelDistance)
 		{
-			// 
-			if (randomTravelAngle < 360f)
+			if (isTurningLeft)
 			{
-				randomTravelAngle += GetRandomRotationAngle() * 180;
-				this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
-			}
-			else if (randomTravelAngle > 360f)
-			{
-				randomTravelAngle -= GetRandomRotationAngle() * 180;
-				this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
-			}
+				randomRotationAngle -= GetRandomRotationAngle() * 180;
+				this.transform.rotation = Quaternion.Euler(0, 0, randomRotationAngle);
+				isTurningLeft = false;
 
-			// Update start position
-			startPosition = npcRigidbody.position;
+				startPosition = this.transform.position;
+			}
+			else
+			{
+				randomRotationAngle += GetRandomRotationAngle() * 180;
+				this.transform.rotation = Quaternion.Euler(0, 0, randomRotationAngle);
+				isTurningLeft = true;
+
+				startPosition = this.transform.position;
+			}
+		}
+	}
+
+	private void SetFirstTurnDirection()
+	{
+		float randomDirection = Random.Range(0f, 1f);
+
+		if (randomDirection < 0.5f)
+		{
+			isTurningLeft = false;
+		}
+		else
+		{
+			isTurningLeft = true;
 		}
 	}
 
