@@ -17,11 +17,12 @@ public class Meander : MonoBehaviour
 	[SerializeField] private float speed = 5f;
 	[SerializeField] private float npcLength = .01f;
 
+	[SerializeField] private AnimationCurve distribution;
+
 	private Vector2 startPosition;
 	private float maxTravelDistance;
 
 	private float randomTravelAngle;
-	private float randomRotationAngle;
 
 	void Awake()
 	{
@@ -36,9 +37,6 @@ public class Meander : MonoBehaviour
 		// Set random travel angle
 		randomTravelAngle = Random.Range(0f, 360f);
 		this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
-
-		// Set random rotation angle
-		randomRotationAngle = Random.Range(20f, 90f);
 	}
 
 	void Update()
@@ -52,17 +50,24 @@ public class Meander : MonoBehaviour
 			// 
 			if (randomTravelAngle < 360f)
 			{
-				randomTravelAngle += randomRotationAngle;
+				randomTravelAngle += GetRandomRotationAngle() * 180;
 				this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
 			}
 			else if (randomTravelAngle > 360f)
 			{
-				randomTravelAngle -= randomRotationAngle;
+				randomTravelAngle -= GetRandomRotationAngle() * 180;
 				this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
 			}
 
 			// Update start position
 			startPosition = npcRigidbody.position;
 		}
+	}
+
+	private float GetRandomRotationAngle()
+	{
+		float randomRotationAngle = Random.Range(0f, 1f);
+
+		return distribution.Evaluate(randomRotationAngle);
 	}
 }
