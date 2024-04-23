@@ -14,45 +14,55 @@ public class Meander : MonoBehaviour
 {
 	private Rigidbody2D npcRigidbody;
 
-	[SerializeField] private float moveSpeed = 0.5f;
-	[SerializeField] private float maxMoveDistance = 1f;
+	[SerializeField] private float speed = 5f;
+	[SerializeField] private float npcLength = .01f;
 
 	private Vector2 startPosition;
-	private float currentMoveDistance;
+	private float maxTravelDistance;
 
-	private Vector2 moveDirection;
+	private float randomTravelAngle;
+	private float randomRotationAngle;
 
 	void Awake()
 	{
 		npcRigidbody = GetComponent<Rigidbody2D>();
+		maxTravelDistance = 3 * npcLength;
+	}
 
-		moveDirection = Random.insideUnitCircle.normalized;
+	void Start()
+	{
 		startPosition = this.transform.position;
-		currentMoveDistance = Random.Range(1, maxMoveDistance);
 
+		// Set random travel angle
+		randomTravelAngle = Random.Range(0f, 360f);
+		this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
+
+		// Set random rotation angle
+		randomRotationAngle = Random.Range(20f, 90f);
 	}
 
 	void Update()
 	{
-		// Move the NPC
-		Vector2 moveVector = moveDirection * moveSpeed * Time.deltaTime;
-		npcRigidbody.MovePosition(npcRigidbody.position + moveVector);
+		// Move NPC in the direction they are facing
+		Vector2 forward = new Vector2(this.transform.up.x, this.transform.up.y);
+		npcRigidbody.velocity = forward * speed;
 
-		// Make the NPC face the direction it's moving
-		float angle = Mathf.Atan2(moveVector.y, moveVector.x) * Mathf.Rad2Deg;
-		npcRigidbody.rotation = angle;
-
-		// Check if the NPC has moved the maximum distance
-		if (Vector2.Distance(startPosition, npcRigidbody.position) > currentMoveDistance)
+		if (Vector2.Distance(npcRigidbody.position, startPosition) >= maxTravelDistance)
 		{
-			// Change direction
-			moveDirection = Random.insideUnitCircle.normalized;
+			// 
+			if (randomTravelAngle < 360f)
+			{
+				randomTravelAngle += randomRotationAngle;
+				this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
+			}
+			else if (randomTravelAngle > 360f)
+			{
+				randomTravelAngle -= randomRotationAngle;
+				this.transform.rotation = Quaternion.Euler(0, 0, randomTravelAngle);
+			}
 
-			// Reset start position for next direction change
+			// Update start position
 			startPosition = npcRigidbody.position;
-
-			// Randomise the move distance for the next direction change
-			currentMoveDistance = Random.Range(1, maxMoveDistance);
 		}
 	}
 }
