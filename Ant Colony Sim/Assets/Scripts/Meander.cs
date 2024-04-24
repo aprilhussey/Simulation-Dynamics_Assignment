@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -48,6 +49,8 @@ public class Meander : MonoBehaviour
 
 	void Update()
 	{
+		DetectObstacles();
+
 		// Move NPC in the direction they are facing
 		Vector2 forward = new Vector2(this.transform.up.x, this.transform.up.y);
 		npcRigidbody.velocity = forward * speed;
@@ -73,8 +76,6 @@ public class Meander : MonoBehaviour
 				startPosition = this.transform.position;
 			}
 		}
-
-		DetectObstacle();
 	}
 
 	private void SetFirstTurnDirection()
@@ -112,24 +113,29 @@ public class Meander : MonoBehaviour
 		}
 	}
 
-	private void DetectObstacle()
+	private void DetectObstacles()
 	{
-		// Define starting point and direction of ray
-		Vector2 rayOrigin = this.transform.position;
-		Vector2 rayDirection = this.transform.up;
-
-		// Define length of ray
-		float rayLength = 10f;
-
 		// Perform raycast
-		RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, rayLength);
+		RaycastHit2D hit = Physics2D.Raycast(this.transform.position, this.transform.up, npcLength);
+		Debug.DrawRay(this.transform.position, this.transform.up);
 
-		// Check if raycast hit obstacle
+		// Check if raycast hit
 		if (hit.collider != null)
 		{
 			if (hit.collider.gameObject.transform.parent != null && hit.collider.gameObject.transform.parent.CompareTag("Obstacle"))
 			{
 				Debug.Log($"Obstacle detected: {hit.collider.gameObject.transform.parent.name}");
+
+				// Calculate the direction away from the obstacle
+				Vector2 directionAwayFromObstacle = this.transform.position - hit.transform.position;
+
+				directionAwayFromObstacle.Normalize();
+
+				// Calculate the angle to rotate the NPC
+				float angle = Mathf.Atan2(directionAwayFromObstacle.y, directionAwayFromObstacle.x) * Mathf.Rad2Deg;
+
+				// Apply rotation
+				this.transform.rotation = Quaternion.Euler(0, 0, angle);
 			}
 		}
 	}
