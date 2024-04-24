@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /*
@@ -10,10 +11,9 @@ using UnityEngine;
 public class Meander : MonoBehaviour
 {
 	private Rigidbody2D npcRigidbody;
+	private float npcLength;
 
 	[SerializeField] private float speed = 5f;
-	[SerializeField] private float npcLength = .01f;
-
 	[SerializeField] private AnimationCurve distribution;
 
 	private Vector2 startPosition;
@@ -21,11 +21,16 @@ public class Meander : MonoBehaviour
 
 	private float randomRotationAngle;
 
-	private bool isTurningLeft;
+	private bool turnLeft;
 
 	void Awake()
 	{
 		npcRigidbody = GetComponent<Rigidbody2D>();
+
+		// Calculate length of NPC
+		CalculateNPCLength();
+
+		// Set max travel distance of NPC
 		maxTravelDistance = 3 * npcLength;
 	}
 
@@ -49,20 +54,22 @@ public class Meander : MonoBehaviour
 
 		if (Vector2.Distance(npcRigidbody.position, startPosition) >= maxTravelDistance)
 		{
-			if (isTurningLeft)
+			if (turnLeft)
 			{
 				randomRotationAngle -= GetRandomRotationAngle() * 180;
 				this.transform.rotation = Quaternion.Euler(0, 0, randomRotationAngle);
-				isTurningLeft = false;
+				turnLeft = false;
 
+				// Reset start position
 				startPosition = this.transform.position;
 			}
-			else
+			else	// Turn right
 			{
 				randomRotationAngle += GetRandomRotationAngle() * 180;
 				this.transform.rotation = Quaternion.Euler(0, 0, randomRotationAngle);
-				isTurningLeft = true;
+				turnLeft = true;
 
+				// Reset start position
 				startPosition = this.transform.position;
 			}
 		}
@@ -74,11 +81,11 @@ public class Meander : MonoBehaviour
 
 		if (randomDirection < 0.5f)
 		{
-			isTurningLeft = false;
+			turnLeft = false;
 		}
 		else
 		{
-			isTurningLeft = true;
+			turnLeft = true;
 		}
 	}
 
@@ -87,5 +94,19 @@ public class Meander : MonoBehaviour
 		float randomRotationAngle = Random.Range(0f, 1f);
 
 		return distribution.Evaluate(randomRotationAngle);
+	}
+
+	private void CalculateNPCLength()
+	{
+		Renderer renderer = this.GetComponentInChildren<Renderer>();
+
+		if (renderer != null)
+		{
+			npcLength = renderer.bounds.size.y;
+		}
+		else
+		{
+			Debug.Log($"No renderer found on: {this.gameObject.name}");
+		}
 	}
 }
