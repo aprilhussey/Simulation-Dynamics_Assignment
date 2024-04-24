@@ -73,6 +73,8 @@ public class Meander : MonoBehaviour
 				startPosition = this.transform.position;
 			}
 		}
+
+		DetectObstacle();
 	}
 
 	private void SetFirstTurnDirection()
@@ -107,6 +109,28 @@ public class Meander : MonoBehaviour
 		else
 		{
 			Debug.Log($"No renderer found on: {this.gameObject.name}");
+		}
+	}
+
+	private void DetectObstacle()
+	{
+		// Define starting point and direction of ray
+		Vector2 rayOrigin = this.transform.position;
+		Vector2 rayDirection = this.transform.up;
+
+		// Define length of ray
+		float rayLength = 10f;
+
+		// Perform raycast
+		RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, rayLength);
+
+		// Check if raycast hit obstacle
+		if (hit.collider != null)
+		{
+			if (hit.collider.gameObject.transform.parent != null && hit.collider.gameObject.transform.parent.CompareTag("Obstacle"))
+			{
+				Debug.Log($"Obstacle detected: {hit.collider.gameObject.transform.parent.name}");
+			}
 		}
 	}
 }
