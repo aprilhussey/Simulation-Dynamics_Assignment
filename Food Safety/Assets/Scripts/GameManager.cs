@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	[HideInInspector]
     public enum GameState
     {
 		Null ,
         MainMenu,
         Game,
+		FridgeLayout,
         Completed
     }
 
@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
 				return GameState.MainMenu;
 			case "Game":
 				return GameState.Game;
+			case "FridgeLayout":
+				return GameState.FridgeLayout;
 			case "Completed":
 				return GameState.Completed;
 		}

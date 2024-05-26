@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
-    public void OnStartTrainingClick()
+    public void OnExitClick()
     {
-        GameManager.Instance.SetGameState(GameManager.GameState.Game);
+        Application.Quit();
     }
 }

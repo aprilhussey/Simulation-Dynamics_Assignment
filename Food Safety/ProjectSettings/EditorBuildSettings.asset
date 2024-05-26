@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 875ca6f4acb545647bcc42bffe13ed1d
+  - enabled: 1
+    path: Assets/Scenes/FridgeLayout.unity
+    guid: c1eeaa69e40df20479457d881a71b437
   m_configObjects: {}
