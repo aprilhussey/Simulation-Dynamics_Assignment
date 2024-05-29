@@ -28,6 +28,8 @@ public class FridgeItem : MonoBehaviour
 	[SerializeField]
 	private bool isFruitOrVeg;
 
+	public FridgeLayoutManager fridgeLayoutManager;
+
 	private void Awake()
 	{
 		originalPosition = this.transform.position;
@@ -39,15 +41,23 @@ public class FridgeItem : MonoBehaviour
 		SetGoesOnFridgeShelfType();
 	}
 
+	private void Start()
+	{
+		fridgeLayoutManager = FindObjectOfType<FridgeLayoutManager>();
+	}
+
 	private void Update()
 	{
-		if (onFridgeShelfType == goesOnFridgeShelfType)
+		if (!fridgeLayoutManager.DebugButtonsActive())
 		{
-			onCorrectShelf = true;
-		}
-		else
-		{
-			onCorrectShelf = false;
+			if (onFridgeShelfType == goesOnFridgeShelfType)
+			{
+				onCorrectShelf = true;
+			}
+			else
+			{
+				onCorrectShelf = false;
+			}
 		}
 	}
 

@@ -19,6 +19,11 @@ public class FridgeLayoutManager : MonoBehaviour
 	[TextArea(0, 10)]
 	public string txtAllFridgeItemsOnCorrectShelves;
 
+	[Header("DebugButtons")]
+	public GameObject btnShowDebugButtons;
+	public GameObject btnHideDebugButtons;
+	public GameObject debugButtons;
+
 	private void Awake()
 	{
 		fridgeItems = GameObject.FindObjectsOfType<FridgeItem>();
@@ -27,6 +32,10 @@ public class FridgeLayoutManager : MonoBehaviour
 
 		btnConfirm.SetActive(false);
 		btnReturnToTrainingMenu.SetActive(false);
+
+		btnShowDebugButtons.SetActive(true);
+		btnHideDebugButtons.SetActive(false);
+		debugButtons.SetActive(false);
 	}
 
 	private void Update()
@@ -43,11 +52,24 @@ public class FridgeLayoutManager : MonoBehaviour
 
 	public bool AllFridgeItemsAreOnAShelf()
 	{
-		foreach (FridgeItem fridgeItem in fridgeItems)
+		if (!debugButtons.activeInHierarchy)
 		{
-			if (fridgeItem.GetOnFridgeShelfType == FridgeShelf.FridgeShelfType.None)
+			foreach (FridgeItem fridgeItem in fridgeItems)
 			{
-				return false;
+				if (fridgeItem.GetOnFridgeShelfType == FridgeShelf.FridgeShelfType.None)
+				{
+					return false;
+				}
+			}
+		}
+		else
+		{
+			foreach (FridgeItem fridgeItem in fridgeItems)
+			{
+				if (!fridgeItem.onCorrectShelf)
+				{
+					return false;
+				}
 			}
 		}
 		return true;
@@ -89,5 +111,41 @@ public class FridgeLayoutManager : MonoBehaviour
 		yield return new WaitForSeconds(5f);
 
 		popup.SetActive(false);
+	}
+
+	// Debug
+	public void DebugShowDebugButtons()
+	{
+		debugButtons.SetActive(true);
+		btnShowDebugButtons.SetActive(false);
+		btnHideDebugButtons.SetActive(true);
+	}
+
+	public void DebugHideDebugButtons()
+	{
+		debugButtons.SetActive(false);
+		btnShowDebugButtons.SetActive(true);
+		btnHideDebugButtons.SetActive(false);
+	}
+
+	public void DebugSetItemsToCorrectShelves()
+	{
+		foreach (FridgeItem fridgeItem in fridgeItems)
+		{
+			fridgeItem.onCorrectShelf = true;
+		}
+	}
+
+	public void DebugSetItemsToOnNoShelves()
+	{
+		foreach (FridgeItem fridgeItem in fridgeItems)
+		{
+			fridgeItem.onCorrectShelf = false;
+		}
+	}
+
+	public bool DebugButtonsActive()
+	{
+		return debugButtons.activeInHierarchy;
 	}
 }
