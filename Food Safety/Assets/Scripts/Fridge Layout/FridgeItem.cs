@@ -7,11 +7,17 @@ public class FridgeItem : MonoBehaviour
 	[SerializeField]
 	private string itemName;
 
+	private Vector3 originalPosition;
+
 	private Vector3 notClickedScale;
 	private Vector3 clickedScale;
 	private Vector3 inFridgeScale;
 
+	[HideInInspector]
+	public FridgeShelf.FridgeShelfType goesOnFridgeShelfType;
 	private FridgeShelf.FridgeShelfType onFridgeShelfType = FridgeShelf.FridgeShelfType.None;
+
+	public bool onCorrectShelf;
 
 	[SerializeField]
 	private bool isReadyToEat;
@@ -24,14 +30,35 @@ public class FridgeItem : MonoBehaviour
 
 	private void Awake()
 	{
+		originalPosition = this.transform.position;
+
 		notClickedScale = this.transform.localScale;
 		clickedScale = notClickedScale * 2;
 		inFridgeScale = notClickedScale / 2;
+
+		SetGoesOnFridgeShelfType();
+	}
+
+	private void Update()
+	{
+		if (onFridgeShelfType == goesOnFridgeShelfType)
+		{
+			onCorrectShelf = true;
+		}
+		else
+		{
+			onCorrectShelf = false;
+		}
 	}
 
 	public string GetItemName
 	{
 		get { return itemName; }
+	}
+
+	public Vector3 GetOriginalPosition
+	{
+		get { return originalPosition; }
 	}
 
 	public Vector3 GetNotClickedScale
@@ -59,6 +86,35 @@ public class FridgeItem : MonoBehaviour
 		onFridgeShelfType = newFridgeShelfType;
 	}
 
+	public FridgeShelf.FridgeShelfType GetGoesOnFridgeShelfType
+	{
+		get { return  goesOnFridgeShelfType; }
+	}
+
+	private void SetGoesOnFridgeShelfType()
+	{
+		if (isReadyToEat)
+		{
+			goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.TopShelf;
+		}
+		else if (isDairyProduct)
+		{
+			goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.MiddleShelf;
+		}
+		else if (isMeat && isReadyToEat)
+		{
+			goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.TopShelf;
+		}
+		else if (isMeat && !isReadyToEat)
+		{
+			goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.BottomShelf;
+		}
+		else if (isFruitOrVeg)
+		{
+			goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.SaladDrawer;
+		}
+	}
+
 	public bool GetIsReadyToEat
 	{
 		get { return isReadyToEat; }
@@ -77,5 +133,12 @@ public class FridgeItem : MonoBehaviour
 	public bool GetIsFruitOrVeg
 	{
 		get { return isFruitOrVeg; }
+	}
+
+	public void ResetToNotClickedState()
+	{
+		this.transform.position = this.GetOriginalPosition;
+		this.transform.localScale = this.GetNotClickedScale;
+		this.SetOnFridgeShelfType(FridgeShelf.FridgeShelfType.None);
 	}
 }
