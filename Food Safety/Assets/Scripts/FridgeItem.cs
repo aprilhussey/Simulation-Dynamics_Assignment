@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class FridgeItem : MonoBehaviour
 {
-	public string itemName;
+	[SerializeField]
+	private string itemName;
 
-	[HideInInspector]
-	public Vector3 notClickedScale;
-	[HideInInspector]
-	public Vector3 clickedScale;
-	[HideInInspector]
-	public Vector3 inFridgeScale;
+	private Vector3 notClickedScale;
+	private Vector3 clickedScale;
+	private Vector3 inFridgeScale;
 
-	public bool isReadyToEat;
-	public bool isDairyProduct;
-    public bool isMeat;
-	public bool isFruitOrVeg;
+	private FridgeShelf.FridgeShelfType onFridgeShelfType = FridgeShelf.FridgeShelfType.None;
+
+	[SerializeField]
+	private bool isReadyToEat;
+	[SerializeField]
+	private bool isDairyProduct;
+	[SerializeField]
+	private bool isMeat;
+	[SerializeField]
+	private bool isFruitOrVeg;
 
 	private void Awake()
 	{
@@ -28,6 +32,31 @@ public class FridgeItem : MonoBehaviour
 	public string GetItemName
 	{
 		get { return itemName; }
+	}
+
+	public Vector3 GetNotClickedScale
+	{
+		get { return notClickedScale; }
+	}
+
+	public Vector3 GetClickedScale
+	{
+		get { return clickedScale; }
+	}
+
+	public Vector3 GetInFridgeScale
+	{
+		get { return inFridgeScale; }
+	}
+
+	public FridgeShelf.FridgeShelfType GetOnFridgeShelfType
+	{
+		get { return onFridgeShelfType; }
+	}
+
+	public void SetOnFridgeShelfType(FridgeShelf.FridgeShelfType newFridgeShelfType)
+	{
+		onFridgeShelfType = newFridgeShelfType;
 	}
 
 	public bool GetIsReadyToEat

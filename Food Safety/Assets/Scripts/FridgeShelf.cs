@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class FridgeShelf : MonoBehaviour
 {
-	public ShelfType shelfType;
+	public FridgeShelfType fridgeShelfType;
 
-	public enum ShelfType
+	public enum FridgeShelfType
 	{
+		None,
 		TopShelf,
 		MiddleShelf,
 		BottomShelf,
-		SaladShelf
+		SaladDrawer
+	}
+
+	public FridgeShelfType GetFridgeShelfType
+	{
+		get { return fridgeShelfType; }
 	}
 }

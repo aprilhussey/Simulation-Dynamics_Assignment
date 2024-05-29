@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c3e38ce7d03254e82714bf6e8a8de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelfType: 2
+  fridgeShelfType: 3
 --- !u!1001 &472852513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1423,7 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c3e38ce7d03254e82714bf6e8a8de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelfType: 3
+  fridgeShelfType: 4
 --- !u!4 &946620268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5050977858887505746, guid: a57e39842b3faa948964f277110a000a, type: 3}
@@ -1679,7 +1679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c3e38ce7d03254e82714bf6e8a8de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelfType: 0
+  fridgeShelfType: 1
 --- !u!4 &1142227091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5562987327336821455, guid: b33d123c37bd92c46a40f515f9ab6e28, type: 3}
@@ -2255,7 +2255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c3e38ce7d03254e82714bf6e8a8de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shelfType: 1
+  fridgeShelfType: 2
 --- !u!1 &1688708305
 GameObject:
   m_ObjectHideFlags: 0

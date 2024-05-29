@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 	private bool isDragging;
 
 	int fridgeShelfLayerMask;
+	private FridgeShelf.FridgeShelfType fridgeShelfType;
 
 	private void Awake()
 	{
@@ -83,22 +84,27 @@ public class PlayerController : MonoBehaviour
 
 			if (GameObjectIsOverShelf())
 			{
-				gameObject.transform.localScale = fridgeItem.inFridgeScale;
+				gameObject.transform.localScale = fridgeItem.GetInFridgeScale;
 			}
 			else
 			{
-				gameObject.transform.localScale = fridgeItem.clickedScale;
+				gameObject.transform.localScale = fridgeItem.GetClickedScale;
 			}
 
 			yield return null;
 		}
+
 		if (GameObjectIsOverShelf())
 		{
-			gameObject.transform.localScale = fridgeItem.inFridgeScale;
+			gameObject.transform.localScale = fridgeItem.GetInFridgeScale;
+			fridgeItem.SetOnFridgeShelfType(fridgeShelfType);
+			Debug.Log($"fridgeShelfType: {fridgeShelfType}");
 		}
 		else
 		{
-			gameObject.transform.localScale = fridgeItem.notClickedScale;
+			gameObject.transform.localScale = fridgeItem.GetNotClickedScale;
+			fridgeItem.SetOnFridgeShelfType(fridgeShelfType);
+			Debug.Log($"fridgeShelfType: {fridgeShelfType}");
 		}
 	}
 
@@ -117,10 +123,14 @@ public class PlayerController : MonoBehaviour
 		{
 			if (hit.transform.GetComponent<FridgeShelf>() != null)
 			{
-				Debug.Log($"hit shelf: {hit.transform.gameObject.name}");
+				//Debug.Log($"hit shelf: {hit.transform.gameObject.name}");
+				fridgeShelfType = hit.transform.GetComponent<FridgeShelf>().GetFridgeShelfType;
 				return true;
 			}
-			Debug.Log($"hit not shelf: {hit.transform.gameObject.name}");
+		}
+		else
+		{
+			fridgeShelfType = FridgeShelf.FridgeShelfType.None;
 		}
 		return false;
 	}
