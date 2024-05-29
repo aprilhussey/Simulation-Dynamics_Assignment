@@ -1,0 +1,54 @@
+{
+    "name": "Input Actions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "8f438161-663f-4ce5-9868-9f1cc5fc07f0",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "PassThrough",
+                    "id": "bac8643f-235e-441e-b888-06a774cee884",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ScreenPosition",
+                    "type": "Value",
+                    "id": "a78884e1-c301-4475-8e5b-92d1c9c57d93",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d992e04d-5740-44e0-a67b-fc5dcfd8a7a3",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "977dd9e5-3052-4046-91fd-94d3ed64b917",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScreenPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
