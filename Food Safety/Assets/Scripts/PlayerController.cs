@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
 	private bool isDragging;
 
+	int fridgeShelfLayerMask;
+
 	private void Awake()
 	{
 		mainCamera = Camera.main;
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
 		playerActionMap = inputActionAsset.FindActionMap("Player");
 		
 		inputActionAsset.Enable();
+
+		fridgeShelfLayerMask = LayerMask.GetMask("FridgeShelf");
 	}
 
 	private void OnEnable()
@@ -59,10 +63,7 @@ public class PlayerController : MonoBehaviour
 		{
 			if (hit.transform.GetComponent<FridgeItem>() != null)
 			{
-				FridgeItem fridgeItem = hit.transform.GetComponent<FridgeItem>();
 				GameObject fridgeItemObject = hit.transform.GetComponent<FridgeItem>().gameObject;
-				Debug.Log($"Hit {fridgeItem.GetItemName}");
-
 				StartCoroutine(Drag(fridgeItemObject));
 			}
 		}
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
 	private IEnumerator Drag(GameObject gameObject)
 	{
-		Vector3 orignalGameObjectScale = gameObject.transform.localScale;
+		FridgeItem fridgeItem = gameObject.GetComponent<FridgeItem>();
 
 		isDragging = true;
 
@@ -78,17 +79,49 @@ public class PlayerController : MonoBehaviour
 
 		while (isDragging)
 		{
-			gameObject.transform.localScale = orignalGameObjectScale * 2;
 			gameObject.transform.position = GetWorldPositionOfGameObject(gameObject) + offset;
+
+			if (GameObjectIsOverShelf())
+			{
+				gameObject.transform.localScale = fridgeItem.inFridgeScale;
+			}
+			else
+			{
+				gameObject.transform.localScale = fridgeItem.clickedScale;
+			}
 
 			yield return null;
 		}
-		gameObject.transform.localScale = orignalGameObjectScale;
+		if (GameObjectIsOverShelf())
+		{
+			gameObject.transform.localScale = fridgeItem.inFridgeScale;
+		}
+		else
+		{
+			gameObject.transform.localScale = fridgeItem.notClickedScale;
+		}
 	}
 
 	private Vector3 GetWorldPositionOfGameObject(GameObject gameObject)
 	{
 		float z = mainCamera.WorldToScreenPoint(gameObject.transform.position).z;
 		return mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, z));
+	}
+
+	private bool GameObjectIsOverShelf()
+	{
+		Ray ray = mainCamera.ScreenPointToRay(screenPosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast(ray, out hit, Mathf.Infinity, fridgeShelfLayerMask))
+		{
+			if (hit.transform.GetComponent<FridgeShelf>() != null)
+			{
+				Debug.Log($"hit shelf: {hit.transform.gameObject.name}");
+				return true;
+			}
+			Debug.Log($"hit not shelf: {hit.transform.gameObject.name}");
+		}
+		return false;
 	}
 }
