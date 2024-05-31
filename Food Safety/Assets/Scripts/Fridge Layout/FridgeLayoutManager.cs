@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class FridgeLayoutManager : MonoBehaviour
 {
-	private FridgeItem[] fridgeItems;
+    private FridgeItem[] fridgeItems;
 
 	public GameObject popup;
 	public TMP_Text txtPopup;
@@ -20,25 +21,35 @@ public class FridgeLayoutManager : MonoBehaviour
 	public string txtAllFridgeItemsOnCorrectShelves;
 
 	[Header("DebugButtons")]
-	public GameObject btnShowDebugButtons;
-	public GameObject btnHideDebugButtons;
 	public GameObject debugButtons;
 
-	private void Awake()
+    // Input actions
+    private PlayerInput playerInput;
+    private InputActionAsset inputActionAsset;
+    private InputActionMap playerActionMap;
+
+    private void Awake()
 	{
-		fridgeItems = GameObject.FindObjectsOfType<FridgeItem>();
+		// Fridge layout
+        fridgeItems = GameObject.FindObjectsOfType<FridgeItem>();
 
 		popup.SetActive(false);
 
 		btnConfirm.SetActive(false);
 		btnReturnToTrainingMenu.SetActive(false);
 
-		btnShowDebugButtons.SetActive(true);
-		btnHideDebugButtons.SetActive(false);
+		// Debug
 		debugButtons.SetActive(false);
-	}
 
-	private void Update()
+        // Input actions
+        playerInput = GameObject.FindObjectOfType<PlayerInput>();
+        inputActionAsset = playerInput.actions;
+        playerActionMap = inputActionAsset.FindActionMap("Player");
+
+        inputActionAsset.Enable();
+    }
+
+    private void Update()
 	{
 		if (AllFridgeItemsAreOnAShelf() && !btnReturnToTrainingMenu.activeInHierarchy)
 		{
@@ -66,7 +77,7 @@ public class FridgeLayoutManager : MonoBehaviour
 		{
 			foreach (FridgeItem fridgeItem in fridgeItems)
 			{
-				if (!fridgeItem.onCorrectShelf)
+				if (fridgeItem.GetOnFridgeShelfType != fridgeItem.GetGoesOnFridgeShelfType)
 				{
 					return false;
 				}
@@ -79,7 +90,7 @@ public class FridgeLayoutManager : MonoBehaviour
 	{
 		foreach (FridgeItem fridgeItem in fridgeItems)
 		{
-			if (!fridgeItem.onCorrectShelf)
+			if (fridgeItem.GetOnFridgeShelfType != fridgeItem.GetGoesOnFridgeShelfType)
 			{
 				fridgeItem.ResetToNotClickedState();
 
@@ -89,7 +100,7 @@ public class FridgeLayoutManager : MonoBehaviour
 					StartCoroutine(ShowPopupAndHide());
 				}
 			}
-			else if (fridgeItem.onCorrectShelf)
+			else if (fridgeItem.GetOnFridgeShelfType == fridgeItem.GetGoesOnFridgeShelfType)
 			{
 				if (!popup.activeInHierarchy)
 				{
@@ -114,25 +125,36 @@ public class FridgeLayoutManager : MonoBehaviour
 	}
 
 	// Debug
+	private void OnDebugPerformed(InputAction.CallbackContext context)
+	{
+		if (!DebugButtonsActive())
+		{
+            DebugShowDebugButtons();
+        }
+		else
+		{
+			DebugHideDebugButtons();
+		}
+	}
+
 	public void DebugShowDebugButtons()
 	{
 		debugButtons.SetActive(true);
-		btnShowDebugButtons.SetActive(false);
-		btnHideDebugButtons.SetActive(true);
 	}
 
 	public void DebugHideDebugButtons()
 	{
 		debugButtons.SetActive(false);
-		btnShowDebugButtons.SetActive(true);
-		btnHideDebugButtons.SetActive(false);
 	}
 
 	public void DebugSetItemsToCorrectShelves()
 	{
 		foreach (FridgeItem fridgeItem in fridgeItems)
 		{
-			fridgeItem.onCorrectShelf = true;
+			if (fridgeItem.GetOnFridgeShelfType != fridgeItem.GetGoesOnFridgeShelfType)
+			{
+				fridgeItem.SetOnFridgeShelfType(fridgeItem.GetGoesOnFridgeShelfType);
+            }
 		}
 	}
 
@@ -140,12 +162,25 @@ public class FridgeLayoutManager : MonoBehaviour
 	{
 		foreach (FridgeItem fridgeItem in fridgeItems)
 		{
-			fridgeItem.onCorrectShelf = false;
-		}
+            if (fridgeItem.GetOnFridgeShelfType != FridgeShelf.FridgeShelfType.None)
+            {
+                fridgeItem.SetOnFridgeShelfType(FridgeShelf.FridgeShelfType.None);
+            }
+        }
 	}
 
 	public bool DebugButtonsActive()
 	{
 		return debugButtons.activeInHierarchy;
 	}
+
+    private void OnEnable()
+    {
+        playerActionMap["Debug"].performed += OnDebugPerformed;
+    }
+
+    private void OnDisable()
+    {
+        playerActionMap["Debug"].performed -= OnDebugPerformed;
+    }
 }

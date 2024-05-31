@@ -44,6 +44,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Debug"",
+                    ""type"": ""Button"",
+                    ""id"": ""050fcbe3-9c1c-4ad5-b324-5e5dcda54c35"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +77,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ScreenPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12a81bf1-0bf2-4462-a730-13fc4658f36a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -78,6 +98,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
         m_Player_ScreenPosition = m_Player.FindAction("ScreenPosition", throwIfNotFound: true);
+        m_Player_Debug = m_Player.FindAction("Debug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +162,14 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Click;
     private readonly InputAction m_Player_ScreenPosition;
+    private readonly InputAction m_Player_Debug;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
         public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Click => m_Wrapper.m_Player_Click;
         public InputAction @ScreenPosition => m_Wrapper.m_Player_ScreenPosition;
+        public InputAction @Debug => m_Wrapper.m_Player_Debug;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +185,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ScreenPosition.started += instance.OnScreenPosition;
             @ScreenPosition.performed += instance.OnScreenPosition;
             @ScreenPosition.canceled += instance.OnScreenPosition;
+            @Debug.started += instance.OnDebug;
+            @Debug.performed += instance.OnDebug;
+            @Debug.canceled += instance.OnDebug;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -172,6 +198,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ScreenPosition.started -= instance.OnScreenPosition;
             @ScreenPosition.performed -= instance.OnScreenPosition;
             @ScreenPosition.canceled -= instance.OnScreenPosition;
+            @Debug.started -= instance.OnDebug;
+            @Debug.performed -= instance.OnDebug;
+            @Debug.canceled -= instance.OnDebug;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -193,5 +222,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnClick(InputAction.CallbackContext context);
         void OnScreenPosition(InputAction.CallbackContext context);
+        void OnDebug(InputAction.CallbackContext context);
     }
 }

@@ -98,13 +98,13 @@ public class PlayerController : MonoBehaviour
 		{
 			gameObject.transform.localScale = fridgeItem.GetInFridgeScale;
 			fridgeItem.SetOnFridgeShelfType(fridgeShelfType);
-			Debug.Log($"fridgeShelfType: {fridgeShelfType}");
+			//Debug.Log($"fridgeShelfType: {fridgeShelfType}");
 		}
 		else
 		{
 			gameObject.transform.localScale = fridgeItem.GetNotClickedScale;
 			fridgeItem.SetOnFridgeShelfType(fridgeShelfType);
-			Debug.Log($"fridgeShelfType: {fridgeShelfType}");
+			//Debug.Log($"fridgeShelfType: {fridgeShelfType}");
 		}
 	}
 

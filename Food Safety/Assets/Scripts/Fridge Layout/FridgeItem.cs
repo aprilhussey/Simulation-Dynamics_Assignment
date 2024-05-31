@@ -17,7 +17,7 @@ public class FridgeItem : MonoBehaviour
 	public FridgeShelf.FridgeShelfType goesOnFridgeShelfType;
 	private FridgeShelf.FridgeShelfType onFridgeShelfType = FridgeShelf.FridgeShelfType.None;
 
-	public bool onCorrectShelf;
+	//public bool onCorrectShelf;
 
 	[SerializeField]
 	private bool isReadyToEat;
@@ -44,21 +44,6 @@ public class FridgeItem : MonoBehaviour
 	private void Start()
 	{
 		fridgeLayoutManager = FindObjectOfType<FridgeLayoutManager>();
-	}
-
-	private void Update()
-	{
-		if (!fridgeLayoutManager.DebugButtonsActive())
-		{
-			if (onFridgeShelfType == goesOnFridgeShelfType)
-			{
-				onCorrectShelf = true;
-			}
-			else
-			{
-				onCorrectShelf = false;
-			}
-		}
 	}
 
 	public string GetItemName
