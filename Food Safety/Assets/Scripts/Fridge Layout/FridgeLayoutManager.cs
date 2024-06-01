@@ -10,7 +10,7 @@ public class FridgeLayoutManager : MonoBehaviour
 
 	public GameObject popup;
 	public TMP_Text txtPopup;
-
+		
 	public GameObject btnConfirm;
 	public GameObject btnReturnToTrainingMenu;
 
@@ -20,7 +20,23 @@ public class FridgeLayoutManager : MonoBehaviour
 	[TextArea(0, 10)]
 	public string txtAllFridgeItemsOnCorrectShelves;
 
-	[Header("DebugButtons")]
+	[Header("Popup Text Remember Specifics")]
+	public string txtRemember;
+    [TextArea(0, 10)]
+    public string txtReadyToEatNotOnCorrectShelf;
+    [TextArea(0, 10)]
+    public string txtDairyProductNotOnCorrectShelf;
+    [TextArea(0, 10)]
+    public string txtRawMeatNotOnCorrectShelf;
+    [TextArea(0, 10)]
+    public string txtFruitOrVegNotOnCorrectShelf;
+
+	private bool showReadyToEatText = false;
+	private bool showDairyProductText = false;
+    private bool showRawMeatText = false;
+    private bool showFruitOrVegText = false;
+
+    [Header("DebugButtons")]
 	public GameObject debugButtons;
 
     // Input actions
@@ -63,24 +79,11 @@ public class FridgeLayoutManager : MonoBehaviour
 
 	public bool AllFridgeItemsAreOnAShelf()
 	{
-		if (!debugButtons.activeInHierarchy)
+		foreach (FridgeItem fridgeItem in fridgeItems)
 		{
-			foreach (FridgeItem fridgeItem in fridgeItems)
+			if (fridgeItem.GetOnFridgeShelfType == FridgeShelf.FridgeShelfType.None)
 			{
-				if (fridgeItem.GetOnFridgeShelfType == FridgeShelf.FridgeShelfType.None)
-				{
-					return false;
-				}
-			}
-		}
-		else
-		{
-			foreach (FridgeItem fridgeItem in fridgeItems)
-			{
-				if (fridgeItem.GetOnFridgeShelfType != fridgeItem.GetGoesOnFridgeShelfType)
-				{
-					return false;
-				}
+				return false;
 			}
 		}
 		return true;
@@ -88,32 +91,81 @@ public class FridgeLayoutManager : MonoBehaviour
 
 	public void CheckFridgeItemsAreOnCorrectShelves()
 	{
+		showReadyToEatText = false;
+		showDairyProductText = false;
+		showRawMeatText = false;
+		showFruitOrVegText = false;
+
 		foreach (FridgeItem fridgeItem in fridgeItems)
 		{
 			if (fridgeItem.GetOnFridgeShelfType != fridgeItem.GetGoesOnFridgeShelfType)
 			{
 				fridgeItem.ResetToNotClickedState();
-
-				if (!popup.activeInHierarchy)
-				{
-					txtPopup.text = txtAllFridgeItemsNotOnCorrectShelves;
-					StartCoroutine(ShowPopupAndHide());
-				}
-			}
-			else if (fridgeItem.GetOnFridgeShelfType == fridgeItem.GetGoesOnFridgeShelfType)
-			{
-				if (!popup.activeInHierarchy)
-				{
-					Time.timeScale = 0f;
-
-					txtPopup.text = txtAllFridgeItemsOnCorrectShelves;
-					popup.SetActive(true);
-
-					btnReturnToTrainingMenu.SetActive(true);
-				}
+                SetBoolsForPopupRememberSpecifics(fridgeItem);
 			}
 		}
-	}
+
+		if (showReadyToEatText || showDairyProductText || showRawMeatText || showFruitOrVegText)
+		{
+			if (!popup.activeInHierarchy)
+			{
+				txtPopup.text = txtAllFridgeItemsNotOnCorrectShelves + "\n" + "\n" + txtRemember;
+
+				if (showReadyToEatText)
+				{
+					txtPopup.text = txtPopup.text + "\n" + txtReadyToEatNotOnCorrectShelf;
+				}
+
+				if (showDairyProductText)
+				{
+					txtPopup.text = txtPopup.text + "\n" + txtDairyProductNotOnCorrectShelf;
+				}
+
+				if (showRawMeatText)
+				{
+					txtPopup.text = txtPopup.text + "\n" + txtRawMeatNotOnCorrectShelf;
+				}
+
+				if (showFruitOrVegText)
+				{
+					txtPopup.text = txtPopup.text + "\n" + txtFruitOrVegNotOnCorrectShelf;
+				}
+
+				StartCoroutine(ShowPopupAndHide());
+			}
+        }
+        else if (!showReadyToEatText && !showDairyProductText && !showRawMeatText && !showFruitOrVegText)
+		{
+			if (!popup.activeInHierarchy)
+			{
+				Time.timeScale = 0f;
+
+				txtPopup.text = txtAllFridgeItemsOnCorrectShelves;
+				popup.SetActive(true);
+
+				btnReturnToTrainingMenu.SetActive(true);
+			}
+		}
+    }
+
+    private void SetBoolsForPopupRememberSpecifics(FridgeItem fridgeItem)
+	{
+		switch (fridgeItem.GetGoesOnFridgeShelfType)
+		{
+			case FridgeShelf.FridgeShelfType.TopShelf:
+				showReadyToEatText = true;
+				break;
+			case FridgeShelf.FridgeShelfType.MiddleShelf:
+				showDairyProductText = true;
+				break;
+			case FridgeShelf.FridgeShelfType.BottomShelf:
+				showRawMeatText = true;
+				break;
+			case FridgeShelf.FridgeShelfType.SaladDrawer:
+				showFruitOrVegText = true;
+				break;
+		}
+    }
 
 	private IEnumerator ShowPopupAndHide()
 	{
@@ -169,7 +221,15 @@ public class FridgeLayoutManager : MonoBehaviour
         }
 	}
 
-	public bool DebugButtonsActive()
+    public void DebugSetItemsToOnTopShelf()
+    {
+        foreach (FridgeItem fridgeItem in fridgeItems)
+        {
+                fridgeItem.SetOnFridgeShelfType(FridgeShelf.FridgeShelfType.TopShelf);
+        }
+    }
+
+    public bool DebugButtonsActive()
 	{
 		return debugButtons.activeInHierarchy;
 	}

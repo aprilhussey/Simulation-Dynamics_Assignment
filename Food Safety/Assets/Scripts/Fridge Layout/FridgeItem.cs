@@ -88,17 +88,17 @@ public class FridgeItem : MonoBehaviour
 
 	private void SetGoesOnFridgeShelfType()
 	{
-		if (isReadyToEat)
+		if (isReadyToEat && !isMeat)
 		{
 			goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.TopShelf;
 		}
+		else if (isReadyToEat && isMeat)
+		{
+            goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.TopShelf;
+        }
 		else if (isDairyProduct)
 		{
 			goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.MiddleShelf;
-		}
-		else if (isMeat && isReadyToEat)
-		{
-			goesOnFridgeShelfType = FridgeShelf.FridgeShelfType.TopShelf;
 		}
 		else if (isMeat && !isReadyToEat)
 		{
