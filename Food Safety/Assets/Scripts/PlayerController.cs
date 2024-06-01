@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
 	int fridgeShelfLayerMask;
 	private FridgeShelf.FridgeShelfType fridgeShelfType;
+
+	[SerializeField]
+	private GameObject prefabCanvasInformationPopup;
 
 	private void Awake()
 	{
@@ -40,12 +44,15 @@ public class PlayerController : MonoBehaviour
 		playerActionMap["Click"].canceled += context => { isDragging = false; };
 
 		playerActionMap["ScreenPosition"].performed += context => { screenPosition = context.ReadValue<Vector2>(); };
+
+		playerActionMap["Information"].performed += OnInformationPerformed;
 	}
 
 	private void OnDisable()
 	{
 		playerActionMap["Click"].performed -= OnClickPerformed;
-	}
+        playerActionMap["Information"].performed -= OnInformationPerformed;
+    }
 
 	private void Update()
 	{
@@ -134,4 +141,40 @@ public class PlayerController : MonoBehaviour
 		}
 		return false;
 	}
+
+	private void OnInformationPerformed(InputAction.CallbackContext context)
+	{
+        Ray ray = mainCamera.ScreenPointToRay(screenPosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.GetComponent<FridgeItem>() != null)
+            {
+				FridgeItem fridgeItem = hit.transform.GetComponent<FridgeItem>();
+                GameObject fridgeItemObject = fridgeItem.gameObject;
+
+				GameObject canvasInformationPopup = Instantiate(prefabCanvasInformationPopup);
+				canvasInformationPopup.GetComponent<Canvas>().worldCamera = mainCamera;
+
+				GameObject informationPopup = canvasInformationPopup.transform.Find("Information Popup").gameObject;
+				informationPopup.SetActive(false);
+
+				TMP_Text txtInformationPopup = informationPopup.GetComponentInChildren<TMP_Text>();
+
+                txtInformationPopup.text = fridgeItem.GetItemName;
+                informationPopup.transform.position = new Vector3(fridgeItemObject.transform.position.x, fridgeItemObject.transform.position.y, informationPopup.transform.position.z);
+                StartCoroutine(ShowInformationPopupAndHide(informationPopup));
+            }
+        }
+    }
+
+    private IEnumerator ShowInformationPopupAndHide(GameObject informationPopup)
+    {
+        informationPopup.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+
+        Destroy(informationPopup);
+    }
 }

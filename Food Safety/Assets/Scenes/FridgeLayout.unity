@@ -2228,6 +2228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1b4bd69f317594cbd895b9c4fa4bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabCanvasInformationPopup: {fileID: 7702787201693559558, guid: cc694dbfd7e58f44191c5ca05a9a219a, type: 3}
 --- !u!4 &916384304
 Transform:
   m_ObjectHideFlags: 0
@@ -2276,6 +2277,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: a78884e1-c301-4475-8e5b-92d1c9c57d93
     m_ActionName: Player/ScreenPosition[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 050fcbe3-9c1c-4ad5-b324-5e5dcda54c35
+    m_ActionName: Player/Debug[/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 493aa759-53b2-4589-ba21-91af1d6b0998
+    m_ActionName: Player/Information[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
