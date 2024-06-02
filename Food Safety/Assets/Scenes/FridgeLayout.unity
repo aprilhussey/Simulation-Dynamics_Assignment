@@ -1934,9 +1934,12 @@ MonoBehaviour:
   txtAllFridgeItemsNotOnCorrectShelves: That wasn't quite right! All the items that
     weren't on the correct shelves have been reset to their original locations. Try
     again!
-  txtAllFridgeItemsOnCorrectShelves: Good job! All of the items are on the correct
-    shelf. You've completed the Fridge Layout modules. Please return to the training
-    menu to complete the other modules.
+  txtAllFridgeItemsOnCorrectShelves: 'Good job! All of the items are on the correct
+    shelf.
+
+
+    You''ve completed the Fridge Layout module. Please return to the
+    training menu to complete the remaining modules.'
   txtRemember: 'Remember the following:'
   txtReadyToEatNotOnCorrectShelf: Food that is ready to eat belongs on the Top Shelf.
   txtDairyProductNotOnCorrectShelf: Dairy products belong on the Middle Shelf.

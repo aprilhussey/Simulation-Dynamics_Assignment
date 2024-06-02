@@ -53,9 +53,9 @@ public class HazardPerceptionPlayerController : MonoBehaviour
             {
                 Hazard hazard = hit.transform.GetComponent<Hazard>();
                 hazard.ClickedAction();
-                
+
                 txtPopup.text = hazard.GetHazardClickedDescription;
-                ShowAndHidePopup();
+                StartCoroutine(ShowAndHidePopup());
             }
         }
     }

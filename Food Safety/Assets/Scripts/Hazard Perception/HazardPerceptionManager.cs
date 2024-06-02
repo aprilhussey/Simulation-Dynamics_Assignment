@@ -13,6 +13,9 @@ public class HazardPerceptionManager : MonoBehaviour
 
     public GameObject btnReturnToTrainingMenu;
 
+    [TextArea(0, 10)]
+    public string txtAllHazardsFound;
+
     [Header("DebugButtons")]
     public GameObject debugButtons;
 
@@ -26,7 +29,6 @@ public class HazardPerceptionManager : MonoBehaviour
         hazards = GameObject.FindObjectsOfType<Hazard>();
 
         popup.SetActive(false);
-
         btnReturnToTrainingMenu.SetActive(false);
 
         // Debug
@@ -38,6 +40,38 @@ public class HazardPerceptionManager : MonoBehaviour
         playerActionMap = inputActionAsset.FindActionMap("Player");
 
         inputActionAsset.Enable();
+    }
+
+    private void Update()
+    {
+        if (AllHazardsFound())
+        {
+            Time.timeScale = 0f;
+
+            txtPopup.text = txtAllHazardsFound;
+            popup.SetActive(true);
+
+            btnReturnToTrainingMenu.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            popup.SetActive(false);
+
+            btnReturnToTrainingMenu.SetActive(false);
+        }
+    }
+
+    public bool AllHazardsFound()
+    {
+        foreach (Hazard hazard in hazards)
+        {
+            if (!hazard.GetIsHazardFound)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void OnEnable()
@@ -63,13 +97,20 @@ public class HazardPerceptionManager : MonoBehaviour
         }
     }
 
-    public GameObject GetPopup
+    public void DebugSetAllHazardsToFound()
     {
-        get { return popup; }
+        foreach (Hazard hazard in hazards)
+        {
+            hazard.SetIsHazardFound(true);
+        }
     }
-    
-    public TMP_Text GetTxtPopup
+
+    public void DebugSetAllHazardsToNotFound()
     {
-        get { return txtPopup; } 
+        foreach (Hazard hazard in hazards)
+        {
+            hazard.SetIsHazardFound(false);
+            hazard.gameObject.SetActive(true);
+        }
     }
 }

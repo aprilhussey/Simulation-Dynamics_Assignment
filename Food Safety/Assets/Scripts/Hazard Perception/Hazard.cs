@@ -33,17 +33,21 @@ public class Hazard : MonoBehaviour
     {
         isHazardFound = true;
 
-        switch (hazardName)
+        if (hazardName == "Pan")
         {
-            case "Pan":
-                this.transform.rotation = Quaternion.Euler(0, 100, 0);
-                break;
-            case "Oven Door":
-                this.transform.rotation = Quaternion.Euler(0, 0, 0);
-                break;
-            case "Pot":
-                this.transform.position = new Vector3(1.837f, 1.152738f, 0.903f);
-                break;
+            this.transform.rotation = Quaternion.Euler(0, 100, 0);
+        }
+        else if (hazardName == "Oven Door")
+        {
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (hazardName == "Pot")
+        {
+            this.transform.position = new Vector3(1.837f, 1.152738f, 0.903f);
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -70,5 +74,10 @@ public class Hazard : MonoBehaviour
     public bool GetIsHazardFound
     {
         get { return isHazardFound; }
+    }
+
+    public void SetIsHazardFound(bool value)
+    {
+        isHazardFound = value;
     }
 }

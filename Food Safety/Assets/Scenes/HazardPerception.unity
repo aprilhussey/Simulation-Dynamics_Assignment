@@ -208,6 +208,8 @@ GameObject:
   m_Component:
   - component: {fileID: 67185764}
   - component: {fileID: 67185765}
+  - component: {fileID: 67185767}
+  - component: {fileID: 67185766}
   m_Layer: 0
   m_Name: MopAndBucket
   m_TagString: Untagged
@@ -250,6 +252,48 @@ MonoBehaviour:
   hazardClickedDescription: Good job! While it's important to keep your work space
     clean it's equally as important to put any cleaning supplies back into the cleaning
     cupboard to minimise trip hazards.
+--- !u!65 &67185766
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67185763}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.18, y: 1.54, z: 0.27}
+  m_Center: {x: 3.63, y: 0.83, z: 2.36}
+--- !u!65 &67185767
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67185763}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.67, y: 0.79, z: 0.64}
+  m_Center: {x: 3.56, y: 0.42, z: 2.11}
 --- !u!1001 &108918030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -972,6 +1016,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1895689310}
+  - {fileID: 483082186}
   m_Father: {fileID: 241160078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1067,6 +1112,139 @@ MonoBehaviour:
   hazardClickedDescription: Perfect! Having a knife hanging over the side is an accident
     waiting to happen. If a knife is no longer being used it should be put aside
     for cleaning.
+--- !u!1 &483082185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483082186}
+  - component: {fileID: 483082189}
+  - component: {fileID: 483082188}
+  - component: {fileID: 483082187}
+  m_Layer: 5
+  m_Name: btn_DebugSetHazardsToNotFound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &483082186
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483082185}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1377458896}
+  m_Father: {fileID: 474863307}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -600, y: 125}
+  m_SizeDelta: {x: 555, y: 115}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &483082187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483082185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.735849, g: 0.25067386, b: 0.18396226, a: 1}
+    m_PressedColor: {r: 0.47450984, g: 0.1764706, b: 0.13725491, a: 1}
+    m_SelectedColor: {r: 0.7372549, g: 0.2509804, b: 0.18431373, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1377458897}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 832053139}
+        m_TargetAssemblyTypeName: HazardPerceptionManager, Assembly-CSharp
+        m_MethodName: DebugSetAllHazardsToNotFound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &483082188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483082185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &483082189
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483082185}
+  m_CullTransparentMesh: 1
 --- !u!1001 &498273783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1129,6 +1307,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1997138530567346, guid: ba8e9ddca1feb044e96f0523f5ec6aac, type: 3}
       insertIndex: -1
       addedObject: {fileID: 498273786}
+    - targetCorrespondingSourceObject: {fileID: 1997138530567346, guid: ba8e9ddca1feb044e96f0523f5ec6aac, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 498273790}
   m_SourcePrefab: {fileID: 100100000, guid: ba8e9ddca1feb044e96f0523f5ec6aac, type: 3}
 --- !u!4 &498273784 stripped
 Transform:
@@ -1157,6 +1338,27 @@ MonoBehaviour:
   secondaryHazardType: 6
   hazardClickedDescription: Well done! Those trash bags are quite the trip hazard
     and it's important to empty make sure bins aren't overflowing.
+--- !u!65 &498273790
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498273785}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.42, y: 0.17, z: 0.47}
+  m_Center: {x: -0.86, y: 0.7, z: -0.1}
 --- !u!1 &515184381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,6 +2136,12 @@ MonoBehaviour:
   popup: {fileID: 515184381}
   txtPopup: {fileID: 1937205361}
   btnReturnToTrainingMenu: {fileID: 1819799224}
+  txtAllHazardsFound: 'Good job! You found all the hazards.
+
+
+    You''ve completed
+    the Hazard Perception module. Please return to the training menu to complete
+    the remaining modules.'
   debugButtons: {fileID: 474863306}
 --- !u!4 &832053140
 Transform:
@@ -2498,7 +2706,7 @@ MonoBehaviour:
   primaryHazardType: 2
   secondaryHazardType: 4
   hazardClickedDescription: Good spot! The pan's handle was hanging over the edge.
-    Make sure that pan's are turned so that their handles are less likely to be knocked
+    Make sure that pans are turned so that their handles are less likely to be knocked
     off the stove which could lead to someone getting burned.
 --- !u!1001 &1069770716
 PrefabInstance:
@@ -3117,6 +3325,142 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4351793577695922, guid: 555556b42aef27c46aa1b017a2fbe4db, type: 3}
   m_PrefabInstance: {fileID: 1341503399}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1377458895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1377458896}
+  - component: {fileID: 1377458898}
+  - component: {fileID: 1377458897}
+  m_Layer: 5
+  m_Name: txt_
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1377458896
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377458895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 483082186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -40, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1377458897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377458895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'DEBUG:
+
+    set all hazards to not found'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 42
+  m_fontSizeBase: 42
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1377458898
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377458895}
+  m_CullTransparentMesh: 1
 --- !u!1 &1424249583
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,6 +3657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1511809579}
   - component: {fileID: 1511809580}
+  - component: {fileID: 1511809581}
   m_Layer: 0
   m_Name: FoodWaste
   m_TagString: Untagged
@@ -3356,6 +3701,27 @@ MonoBehaviour:
   hazardClickedDescription: Wonderful! Food waste should be removed from your work
     top and put into the trash. Your work top will need to be cleaned to ensure there
     is no cross-contamination.
+--- !u!65 &1511809581
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511809578}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.58, y: 0.11, z: 0.62}
+  m_Center: {x: 3.09, y: 1.06, z: 0.99}
 --- !u!1 &1597810563
 GameObject:
   m_ObjectHideFlags: 0
@@ -4082,9 +4448,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: FridgeLayoutManager, Assembly-CSharp
-        m_MethodName: DebugSetItemsToCorrectShelves
+      - m_Target: {fileID: 832053139}
+        m_TargetAssemblyTypeName: HazardPerceptionManager, Assembly-CSharp
+        m_MethodName: DebugSetAllHazardsToFound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4276,6 +4642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1969162827}
   - component: {fileID: 1969162828}
+  - component: {fileID: 1969162829}
   m_Layer: 0
   m_Name: Boxes
   m_TagString: Untagged
@@ -4318,6 +4685,27 @@ MonoBehaviour:
   hazardClickedDescription: Nice! If not needed, boxes should be stored in the appropiate
     space for their contents. This space should be out of the way so they can't be
     knocked over.
+--- !u!65 &1969162829
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969162826}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.79, y: 0.82, z: 0.55}
+  m_Center: {x: -1.06, y: 1.37, z: 0.9}
 --- !u!1001 &2016774611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4397,6 +4785,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1588191279312470, guid: 85e0f933beabb974a9c4889242a2ac58, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2016774614}
+    - targetCorrespondingSourceObject: {fileID: 1588191279312470, guid: 85e0f933beabb974a9c4889242a2ac58, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2016774618}
   m_SourcePrefab: {fileID: 100100000, guid: 85e0f933beabb974a9c4889242a2ac58, type: 3}
 --- !u!4 &2016774612 stripped
 Transform:
@@ -4426,6 +4817,27 @@ MonoBehaviour:
   hazardClickedDescription: Nice! Oven doors should always be closed if you aren't
     getting something from them to ensure someone won't get hurt or burned by tripping
     over it
+--- !u!65 &2016774618
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016774613}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.783693, y: 0.5169253, z: 0.15045823}
+  m_Center: {x: 0, y: 0.2428496, z: 0.057200704}
 --- !u!1001 &2074455704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4498,6 +4910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2145109979}
   - component: {fileID: 2145109980}
+  - component: {fileID: 2145109981}
   m_Layer: 0
   m_Name: Plates
   m_TagString: Untagged
@@ -4542,6 +4955,27 @@ MonoBehaviour:
   hazardClickedDescription: Awesome! Plates should be stored away from the workspace
     to avoid cross-contamination. In addition, plates should be stored when they
     won't be knocked over easily.
+--- !u!65 &2145109981
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145109978}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.49, y: 0.13, z: 0.46}
+  m_Center: {x: -0.09, y: 1.09, z: 0.87}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

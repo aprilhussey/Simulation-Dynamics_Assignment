@@ -145,7 +145,11 @@ public class FridgeLayoutManager : MonoBehaviour
 
 				btnReturnToTrainingMenu.SetActive(true);
 			}
-		}
+            else
+            {
+				Time.timeScale = 1f;
+            }
+        }
     }
 
     private void SetBoolsForPopupRememberSpecifics(FridgeItem fridgeItem)
