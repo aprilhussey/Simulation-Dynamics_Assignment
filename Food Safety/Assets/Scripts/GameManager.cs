@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
         Game,
 		FridgeLayoutVideo,
         FridgeLayout,
-		HazardPerception,
+        HazardPerceptionVideo,
+        HazardPerception
     }
 
 	public static GameManager Instance;
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour
                 return GameState.FridgeLayoutVideo;
             case "FridgeLayout":
 				return GameState.FridgeLayout;
+            case "HazardPerceptionVideo":
+                return GameState.HazardPerceptionVideo;
             case "HazardPerception":
                 return GameState.HazardPerception;
 		}

@@ -6,6 +6,8 @@ using UnityEngine.Video;
 public class VideoScript : MonoBehaviour
 {
     private VideoPlayer videoPlayer;
+    [SerializeField]
+    private GameManager.GameState gameStateToChangeTo;
 
     private void Awake()
     {
@@ -16,6 +18,6 @@ public class VideoScript : MonoBehaviour
 
     private void VideoEnded(VideoPlayer vp)
     {
-        GameManager.Instance.SetGameState(GameManager.GameState.FridgeLayout);
+        GameManager.Instance.SetGameState(gameStateToChangeTo);
     }
 }
