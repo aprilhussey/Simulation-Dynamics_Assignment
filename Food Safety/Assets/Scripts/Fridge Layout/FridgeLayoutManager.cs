@@ -176,30 +176,20 @@ public class FridgeLayoutManager : MonoBehaviour
 		popup.SetActive(false);
 	}
 
-	// Debug
-	private void OnDebugPerformed(InputAction.CallbackContext context)
-	{
-		if (!DebugButtonsActive())
-		{
-            DebugShowDebugButtons();
+    // Debug
+    private void OnDebugPerformed(InputAction.CallbackContext context)
+    {
+        if (!debugButtons.activeInHierarchy)
+        {
+            debugButtons.SetActive(true);
         }
-		else
-		{
-			DebugHideDebugButtons();
-		}
-	}
+        else
+        {
+            debugButtons.SetActive(false);
+        }
+    }
 
-	public void DebugShowDebugButtons()
-	{
-		debugButtons.SetActive(true);
-	}
-
-	public void DebugHideDebugButtons()
-	{
-		debugButtons.SetActive(false);
-	}
-
-	public void DebugSetItemsToCorrectShelves()
+    public void DebugSetItemsToCorrectShelves()
 	{
 		foreach (FridgeItem fridgeItem in fridgeItems)
 		{
@@ -228,11 +218,6 @@ public class FridgeLayoutManager : MonoBehaviour
                 fridgeItem.SetOnFridgeShelfType(FridgeShelf.FridgeShelfType.TopShelf);
         }
     }
-
-    public bool DebugButtonsActive()
-	{
-		return debugButtons.activeInHierarchy;
-	}
 
     private void OnEnable()
     {

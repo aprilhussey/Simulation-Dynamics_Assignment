@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class PlayerController : MonoBehaviour
+public class FridgeLayoutPlayerController : MonoBehaviour
 {
 	private Camera mainCamera;
 
@@ -53,12 +53,6 @@ public class PlayerController : MonoBehaviour
 		playerActionMap["Click"].performed -= OnClickPerformed;
         playerActionMap["Information"].performed -= OnInformationPerformed;
     }
-
-	private void Update()
-	{
-		//Debug.Log($"screenPosition: {screenPosition}");
-		//Debug.Log($"isDragging: {isDragging}");
-	}
 
 	private void OnClickPerformed(InputAction.CallbackContext context)
 	{
