@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
 		None ,
         MainMenu,
         Game,
-		FridgeLayout,
+		FridgeLayoutVideo,
+        FridgeLayout,
 		HazardPerception,
     }
 
@@ -43,7 +44,9 @@ public class GameManager : MonoBehaviour
 				return GameState.MainMenu;
 			case "Game":
 				return GameState.Game;
-			case "FridgeLayout":
+            case "FridgeLayoutVideo":
+                return GameState.FridgeLayoutVideo;
+            case "FridgeLayout":
 				return GameState.FridgeLayout;
             case "HazardPerception":
                 return GameState.HazardPerception;

@@ -48,6 +48,7 @@ public class HazardPerceptionPlayerController : MonoBehaviour
     private void OnClickPerformed(InputAction.CallbackContext context)
     {
         if (canvasIntroduction.activeInHierarchy) { return; }
+
         Ray ray = mainCamera.ScreenPointToRay(screenPosition);
         RaycastHit hit;
 
