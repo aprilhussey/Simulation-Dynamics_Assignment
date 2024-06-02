@@ -8,6 +8,9 @@ public class HazardPerceptionManager : MonoBehaviour
 {
     private Hazard[] hazards;
 
+    [SerializeField]
+    private GameObject canvasIntroduction;
+
     public GameObject popup;
     public TMP_Text txtPopup;
 
@@ -40,6 +43,9 @@ public class HazardPerceptionManager : MonoBehaviour
         playerActionMap = inputActionAsset.FindActionMap("Player");
 
         inputActionAsset.Enable();
+
+        canvasIntroduction.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     private void Update()
@@ -82,6 +88,12 @@ public class HazardPerceptionManager : MonoBehaviour
     private void OnDisable()
     {
         playerActionMap["Debug"].performed -= OnDebugPerformed;
+    }
+
+    public void OnStartModuleButtonClick()
+    {
+        Time.timeScale = 1f;
+        canvasIntroduction.SetActive(false);
     }
 
     // Debug

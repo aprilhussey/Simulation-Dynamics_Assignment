@@ -8,6 +8,9 @@ public class FridgeLayoutManager : MonoBehaviour
 {
     private FridgeItem[] fridgeItems;
 
+	[SerializeField]
+	private GameObject canvasIntroduction;
+
 	public GameObject popup;
 	public TMP_Text txtPopup;
 		
@@ -63,6 +66,9 @@ public class FridgeLayoutManager : MonoBehaviour
         playerActionMap = inputActionAsset.FindActionMap("Player");
 
         inputActionAsset.Enable();
+
+        canvasIntroduction.SetActive(true);
+		Time.timeScale = 0f;
     }
 
     private void Update()
@@ -180,6 +186,12 @@ public class FridgeLayoutManager : MonoBehaviour
 		popup.SetActive(false);
 	}
 
+	public void OnStartModuleButtonClick()
+	{
+		Time.timeScale = 1f;
+		canvasIntroduction.SetActive(false);
+	}
+
     // Debug
     private void OnDebugPerformed(InputAction.CallbackContext context)
     {
@@ -219,7 +231,7 @@ public class FridgeLayoutManager : MonoBehaviour
     {
         foreach (FridgeItem fridgeItem in fridgeItems)
         {
-                fridgeItem.SetOnFridgeShelfType(FridgeShelf.FridgeShelfType.TopShelf);
+            fridgeItem.SetOnFridgeShelfType(FridgeShelf.FridgeShelfType.TopShelf);
         }
     }
 
