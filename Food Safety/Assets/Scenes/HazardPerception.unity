@@ -2653,6 +2653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popup: {fileID: 515184381}
   txtPopup: {fileID: 1937205361}
+  canvasIntroduction: {fileID: 310030017}
 --- !u!114 &866699734
 MonoBehaviour:
   m_ObjectHideFlags: 0

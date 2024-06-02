@@ -24,7 +24,10 @@ public class FridgeLayoutPlayerController : MonoBehaviour
 	[SerializeField]
 	private GameObject prefabCanvasInformationPopup;
 
-	private void Awake()
+    [SerializeField]
+    private GameObject canvasIntroduction;
+
+    private void Awake()
 	{
 		mainCamera = Camera.main;
 
@@ -56,9 +59,9 @@ public class FridgeLayoutPlayerController : MonoBehaviour
 
 	private void OnClickPerformed(InputAction.CallbackContext context)
 	{
-		//Debug.Log($"Click action triggered");
+        if (canvasIntroduction.activeInHierarchy) { return; }
 
-		Ray ray = mainCamera.ScreenPointToRay(screenPosition);
+        Ray ray = mainCamera.ScreenPointToRay(screenPosition);
 		RaycastHit hit;
 
 		if (Physics.Raycast(ray, out hit))

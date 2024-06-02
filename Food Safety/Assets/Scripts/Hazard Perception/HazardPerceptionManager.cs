@@ -59,13 +59,6 @@ public class HazardPerceptionManager : MonoBehaviour
 
             btnReturnToTrainingMenu.SetActive(true);
         }
-        else
-        {
-            Time.timeScale = 1f;
-            popup.SetActive(false);
-
-            btnReturnToTrainingMenu.SetActive(false);
-        }
     }
 
     public bool AllHazardsFound()

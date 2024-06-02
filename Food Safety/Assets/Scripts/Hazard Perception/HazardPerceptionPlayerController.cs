@@ -18,6 +18,9 @@ public class HazardPerceptionPlayerController : MonoBehaviour
     public GameObject popup;
     public TMP_Text txtPopup;
 
+    [SerializeField]
+    private GameObject canvasIntroduction;
+
     private void Awake()
     {
         mainCamera = Camera.main;
@@ -44,6 +47,7 @@ public class HazardPerceptionPlayerController : MonoBehaviour
 
     private void OnClickPerformed(InputAction.CallbackContext context)
     {
+        if (canvasIntroduction.activeInHierarchy) { return; }
         Ray ray = mainCamera.ScreenPointToRay(screenPosition);
         RaycastHit hit;
 

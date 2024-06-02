@@ -2893,6 +2893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabCanvasInformationPopup: {fileID: 7702787201693559558, guid: cc694dbfd7e58f44191c5ca05a9a219a, type: 3}
+  canvasIntroduction: {fileID: 786051469}
 --- !u!4 &916384304
 Transform:
   m_ObjectHideFlags: 0
