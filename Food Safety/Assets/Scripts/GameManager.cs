@@ -7,11 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public enum GameState
     {
-		Null ,
+		None ,
         MainMenu,
         Game,
 		FridgeLayout,
-        Completed
+		HazardPerception,
     }
 
 	public static GameManager Instance;
@@ -37,19 +37,19 @@ public class GameManager : MonoBehaviour
 
 		switch (activeSceneName)
 		{
-			case "Null":
-				return GameState.Null;
+			case "None":
+				return GameState.None;
 			case "MainMenu":
 				return GameState.MainMenu;
 			case "Game":
 				return GameState.Game;
 			case "FridgeLayout":
 				return GameState.FridgeLayout;
-			case "Completed":
-				return GameState.Completed;
+            case "HazardPerception":
+                return GameState.HazardPerception;
 		}
 
-		return GameState.Null;
+		return GameState.None;
 	}
 
 	public GameState GetGameState

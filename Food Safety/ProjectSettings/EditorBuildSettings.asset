@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FridgeLayout.unity
     guid: c1eeaa69e40df20479457d881a71b437
+  - enabled: 1
+    path: Assets/Scenes/HazardPerception.unity
+    guid: 1f9d4a35561ce5e4a8eb3f2a1fa7bdd2
   m_configObjects: {}
